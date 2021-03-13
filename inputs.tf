@@ -13,8 +13,8 @@ variable "private_key_path" {
 }
 
 variable "key_name" {
-  description = "master key for the lab"
-  default     = "lab-key"
+  description = "master key for the bastian"
+  default     = "bastian-key"
 }
 
 variable "name" {
@@ -23,4 +23,21 @@ variable "name" {
 
 variable "instance_type" {
   default = "t3.micro"
+}
+
+variable "owner" {
+  description = "owner of the resource"
+}
+
+variable "project" {
+  description = "project name"
+}
+
+variable "env" {
+  description = "environment - i.e. dev, test, prod"
+}
+
+variable "workspace" {
+  description = "terraform workspace"
+  default     = "default"
 }

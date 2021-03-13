@@ -1,5 +1,10 @@
-name             = "bryan"
+name             = "muoki"
 key_name         = "lab-key"
 private_key_path = "./ssh/id_rsa"
 public_key_path  = "./ssh/id_rsa.pub"
-instance_type    = "t3.large"
+instance_type    = "t3.micro"
+owner            = "muokid3"
+project          = "k3s-lab"
+env              = "dev"
+workspace        = "default"
+

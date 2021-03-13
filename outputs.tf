@@ -1,8 +1,8 @@
-output "sandbox" {
-  value = module.dev.sandbox
+output "bastian" {
+  value = module.bastian.bastian
 }
 
-output "sandbox_ip" {
-  value = module.dev.sandbox_ip
+output "bastian_ip" {
+  value = module.bastian.bastian_ip
 }
 

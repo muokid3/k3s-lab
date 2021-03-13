@@ -8,7 +8,7 @@ up: fmt plan apply
 debug:
 	docker container run -it --rm \
 		   --env TF_NAMESPACE=$$TF_NAMESPACE \
-		   --env AWS_PROFILE="labs" \
+		   --env AWS_PROFILE="muokid3" \
 		   -v /var/run/docker.sock:/var/run/docker.sock \
 		   -v $$PWD:/$$(basename $$PWD) \
 		   -v $$PWD/creds:/.aws \
@@ -21,7 +21,7 @@ debug:
 ver:
 	docker container run -it --rm \
 		   --env TF_NAMESPACE=$$TF_NAMESPACE \
-		   --env AWS_PROFILE="labs" \
+		   --env AWS_PROFILE="muokid3" \
 		   -v /var/run/docker.sock:/var/run/docker.sock \
 		   -v $$PWD:/$$(basename $$PWD) \
 		   -v $$PWD/creds:/.aws \
@@ -35,7 +35,7 @@ ver:
 fmt:
 	docker container run -it --rm \
 		   --env TF_NAMESPACE=$$TF_NAMESPACE \
-		   --env AWS_PROFILE="labs" \
+		   --env AWS_PROFILE="muokid3" \
 		   -v /var/run/docker.sock:/var/run/docker.sock \
 		   -v $$PWD:/$$(basename $$PWD) \
 		   -v $$PWD/creds:/.aws \
@@ -46,10 +46,25 @@ fmt:
 		   --entrypoint terraform \
 		   bryandollery/terraform-packer-aws-alpine:14 fmt -recursive
 
+
+validate:
+	time -p docker container run -it --rm \
+		   --env TF_NAMESPACE=$$TF_NAMESPACE \
+		   --env AWS_PROFILE="muokid3" \
+		   -v /var/run/docker.sock:/var/run/docker.sock \
+		   -v $$PWD:/$$(basename $$PWD) \
+		   -v $$PWD/creds:/.aws \
+		   --hostname "$$(basename $$PWD)" \
+		   --name "$$(basename $$PWD)_fmt" \
+		   -w /$$(basename $$PWD) \
+		   -u $$(id -u):$$(id -g) \
+		   --entrypoint terraform \
+		   bryandollery/terraform-packer-aws-alpine:14 validate
+
 plan: clean
 	time docker container run -it --rm \
 		   --env TF_NAMESPACE=$$TF_NAMESPACE \
-		   --env AWS_PROFILE="labs" \
+		   --env AWS_PROFILE="muokid3" \
 		   -v /var/run/docker.sock:/var/run/docker.sock \
 		   -v $$PWD:/$$(basename $$PWD) \
 		   -v $$PWD/creds:/.aws \
@@ -65,7 +80,7 @@ apply: _apply output.json
 _apply:
 	time docker container run -it --rm \
 		   --env TF_NAMESPACE=$$TF_NAMESPACE \
-		   --env AWS_PROFILE="labs" \
+		   --env AWS_PROFILE="muokid3" \
 		   -v /var/run/docker.sock:/var/run/docker.sock \
 		   -v $$PWD:/$$(basename $$PWD) \
 		   -v $$PWD/creds:/.aws \
@@ -79,7 +94,7 @@ _apply:
 down:
 	time docker container run -it --rm \
 		   --env TF_NAMESPACE=$$TF_NAMESPACE \
-		   --env AWS_PROFILE="labs" \
+		   --env AWS_PROFILE="muokid3" \
 		   -v /var/run/docker.sock:/var/run/docker.sock \
 		   -v $$PWD:/$$(basename $$PWD) \
 		   -v $$PWD/creds:/.aws \
@@ -97,7 +112,7 @@ test: copy connect
 output.json:
 	docker container run -it --rm \
 		   --env TF_NAMESPACE=$$TF_NAMESPACE \
-		   --env AWS_PROFILE="labs" \
+		   --env AWS_PROFILE="muokid3" \
 		   -v /var/run/docker.sock:/var/run/docker.sock \
 		   -v $$PWD:/$$(basename $$PWD) \
 		   -v $$PWD/creds:/.aws \
@@ -130,7 +145,7 @@ init: clean
 	ssh-keygen -t rsa -f ./ssh/id_rsa -q -N ""
 	time docker container run -it --rm \
 		   --env TF_NAMESPACE=$$TF_NAMESPACE \
-		   --env AWS_PROFILE="labs" \
+		   --env AWS_PROFILE="muokid3" \
 		   -v /var/run/docker.sock:/var/run/docker.sock \
 		   -v $$PWD:/$$(basename $$PWD) \
 		   -v $$PWD/creds:/.aws \
